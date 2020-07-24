@@ -57,3 +57,31 @@ function Equip(item)
 	print("Equipping " .. item)
 	SayCustom(".x use " .. tool_id .. " Equip")
 end
+
+function GetWeight(id)
+    GetTooltip(id)
+    local output = nil
+    for line in string.gmatch(TOOLTIPTEXT, '([^|]+)') do
+        if string.match(line, "Weight:") then
+            for weight in string.gmatch(line, "Weight:%s(.*)") do
+                --print(weight)
+                output = weight
+            end
+        end
+    end
+    return output
+end
+
+function GetQuantity(id)
+    GetTooltip(id)
+    local output = nil
+    for line in string.gmatch(TOOLTIPTEXT, '([^|]+)') do
+        if string.match(line, "Contains:") then
+        	for itemCount in string.gmatch(line, "Contains:%s(%d+)") do
+            	--print(itemCount)
+            	output = itemCount
+        	end
+    	end
+    end
+    return output
+end
